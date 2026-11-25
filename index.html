@@ -1,0 +1,673 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<style>body{margin:0}img{max-width:100%}</style>
+</head>
+<body>
+<title>Auro Salmon Showreel</title>
+<meta name="description" content="Auro Salmon, 3D generalist: showreel, character work and 3D models you can turn around.">
+<meta property="og:title" content="Auro Salmon · 3D Generalist">
+<meta property="og:description" content="Showreel, character work and 3D models you can turn around.">
+<meta name="theme-color" content="#07080a">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..800&family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style id="app-style">
+/* Layout: one column in a black void. Each piece is a "room" lit only by its own hue; the hue strip under the name is the table of contents. The 3D viewer is the one big lit object. Single dark look by design (Lit From Within). */
+:root{
+  color-scheme:dark;
+  --void:#07080a; --panel:#0e1013; --paper:#f2f2ef; --muted:#9a9da6; --line:#24262c;
+  --iris:#7fd3ff; --iris-ink:#06212e; --warn:#ff9b8a;
+  --green:#1f8f5f; --green-s:#0b3b2a; --green-g:#5ff2c0;
+  --violet:#6a3cff; --violet-s:#1a0d40; --violet-g:#c3b0ff;
+  --red:#d8321e; --red-s:#4a0d08; --red-g:#ff8a6a;
+  --crimson:#c4122f; --crimson-s:#2a0309; --crimson-g:#ffb3bd;
+  --amber:#c98a12; --amber-s:#2e1f04; --amber-g:#f3c84a;
+  --cobalt:#3d5cff; --cobalt-s:#0c1442; --cobalt-g:#a9b8ff;
+  --display:"Bricolage Grotesque","Arial Narrow","Helvetica Neue",Arial,sans-serif;
+  --body:"IBM Plex Sans","Segoe UI",Roboto,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
+  --dom:var(--iris); --sh:#0d2a3a; --glow:var(--iris);
+}
+.h-green{--dom:var(--green);--sh:var(--green-s);--glow:var(--green-g)}
+.h-violet{--dom:var(--violet);--sh:var(--violet-s);--glow:var(--violet-g)}
+.h-red{--dom:var(--red);--sh:var(--red-s);--glow:var(--red-g)}
+.h-crimson{--dom:var(--crimson);--sh:var(--crimson-s);--glow:var(--crimson-g)}
+.h-cobalt{--dom:var(--cobalt);--sh:var(--cobalt-s);--glow:var(--cobalt-g)}
+.h-amber{--dom:var(--amber);--sh:var(--amber-s);--glow:var(--amber-g)}
+.h-iris{--dom:var(--iris);--sh:#0d2a3a;--glow:var(--iris)}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth}
+body{background:var(--void);color:var(--paper);font-family:var(--body);font-size:16px;line-height:1.55}
+a{color:var(--iris)}
+button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:2px solid var(--iris);outline-offset:2px}
+p{margin:0;max-width:62ch}
+.page{max-width:980px;margin:0 auto}
+.in{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.mono{font-family:var(--mono);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase}
+.muted{color:var(--muted)}
+
+/* Top bar: eye, name, music, hue strip */
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--void)}
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:rgba(7,8,10,.92);backdrop-filter:blur(8px)}
+.top .in{display:flex;align-items:center;gap:10px;padding-block:8px;max-width:980px;margin:0 auto}
+.eye{width:34px;height:34px;flex:none}
+.who{font-family:var(--display);font-variation-settings:"wdth" 75;font-weight:800;text-transform:uppercase;font-size:1.15rem;line-height:1;min-width:0}
+.who small{display:block;font-family:var(--mono);font-weight:400;font-size:.6rem;letter-spacing:.1em;color:var(--muted);margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tools{margin-left:auto;display:flex;gap:6px;flex:none}
+.strip{display:flex;max-width:980px;margin:0 auto}
+.strip a{flex:1;min-width:0;display:block;padding:7px 0 6px;text-decoration:none;text-align:center;font-family:var(--mono);font-size:.56rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);border-top:4px solid var(--dom);opacity:.55;transition:opacity .2s;white-space:nowrap;overflow:hidden}
+.strip a[aria-current="true"]{opacity:1;color:var(--glow);box-shadow:0 -10px 24px -8px var(--dom) inset}
+.tb{border:1px solid var(--line);background:var(--panel);border-radius:3px;padding:6px 10px;font-size:.8rem;display:inline-flex;align-items:center;gap:6px;white-space:nowrap}
+.tb svg{width:16px;height:16px;flex:none}
+.tb.primary{background:var(--iris);border-color:var(--iris);color:var(--iris-ink);font-weight:600}
+.tb.on{border-color:var(--iris);color:var(--iris)}
+.tb:disabled{opacity:.45;cursor:default}
+.music .bars{display:inline-flex;gap:2px;align-items:flex-end;height:12px}
+.music .bars i{width:2px;background:currentColor;height:3px}
+.music.on .bars i{animation:eq 1s ease-in-out infinite}
+.music.on .bars i:nth-child(2){animation-delay:-.4s}.music.on .bars i:nth-child(3){animation-delay:-.7s}
+@keyframes eq{0%,100%{height:3px}50%{height:12px}}
+.editbar{display:flex;gap:8px;align-items:center;flex-wrap:wrap;max-width:980px;margin:0 auto;padding-block:6px;border-top:1px dashed var(--line)}
+.status{font-family:var(--mono);font-size:.7rem;color:var(--muted)}
+.status.dirty{color:var(--iris)}
+
+/* Rooms */
+section{padding-block:40px 48px;display:flex;flex-direction:column;gap:18px;position:relative;scroll-margin-top:calc(env(safe-area-inset-top,0px) + 84px);
+  background:radial-gradient(120% 60% at 50% 34%,color-mix(in srgb,var(--sh) 70%,transparent),transparent 70%)}
+.slate{display:flex;align-items:center;gap:.7em;color:var(--glow)}
+.slate::before{content:"";width:1.6em;height:.7em;background:var(--dom);clip-path:polygon(0 0,100% 18%,86% 100%,6% 82%)}
+h2,h1{font-family:var(--display);font-variation-settings:"wdth" 75;font-weight:800;text-transform:uppercase;line-height:.88;margin:0;letter-spacing:-.01em;text-wrap:balance}
+h2{font-size:clamp(2.6rem,12vw,4.6rem)}
+h1 span{text-shadow:0 0 28px color-mix(in srgb,var(--dom) 80%,transparent)}
+.cut{position:relative;align-self:flex-start;padding:10px 26px 12px 14px;margin-left:-14px;isolation:isolate}
+.cut::before{content:"";position:absolute;inset:0;z-index:-1;background:var(--dom);clip-path:polygon(0 8%,96% 0,100% 78%,4% 100%)}
+.cut::after{content:"";position:absolute;inset:0;z-index:-2;background:var(--sh);clip-path:polygon(3% 0,100% 14%,94% 100%,0 86%);transform:translate(7px,7px)}
+.cut h2{color:var(--void)}
+.role{font-family:var(--mono);font-size:.78rem;line-height:1.5;color:var(--glow)}
+.role b{color:var(--muted);font-weight:400;text-transform:uppercase;letter-spacing:.1em;font-size:.68rem}
+.tags{display:flex;flex-wrap:wrap;gap:6px}
+.tag{font-family:var(--mono);font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;border:1px solid color-mix(in srgb,var(--dom) 60%,transparent);color:var(--glow);padding:2px 8px}
+.lit{border:1px solid color-mix(in srgb,var(--dom) 70%,transparent);box-shadow:0 0 70px -10px color-mix(in srgb,var(--dom) 65%,transparent),0 0 0 1px #000 inset;background:#030405}
+.two{display:grid;gap:18px}
+@media (min-width:760px){.two{grid-template-columns:1fr 1fr;align-items:start}.two > *{min-width:0}}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:11px 16px;border-radius:3px;border:1px solid var(--line);background:var(--panel);color:var(--paper);text-decoration:none;font-weight:600;font-size:.92rem}
+.btn.primary{background:var(--iris);border-color:var(--iris);color:var(--iris-ink)}
+.btn.hue{border-color:var(--dom);color:var(--glow);background:transparent}
+.cta{display:flex;gap:8px;flex-wrap:wrap}
+
+/* Hero */
+.hero{padding-top:18px}
+.hero-grid{display:grid;gap:18px}
+@media (min-width:760px){.hero-grid{grid-template-columns:1.1fr 1fr;align-items:center}.hero-grid > *{min-width:0}}
+.name{font-size:clamp(3.4rem,15vw,6.6rem)}
+.pitch{font-size:1.02rem}
+.logo{position:relative;aspect-ratio:16/9;max-width:100%;overflow:hidden}
+.logo video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+
+/* Clips */
+.clip{margin:0;display:flex;flex-direction:column;gap:8px;min-width:0}
+.clip .fr{position:relative;aspect-ratio:16/9;max-width:100%;overflow:hidden}
+.clip video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;background:#000}
+.clip figcaption{display:flex;gap:10px;align-items:baseline;justify-content:space-between;font-size:.86rem;color:var(--muted);min-width:0}
+.clip figcaption b{font-family:var(--mono);font-weight:400;font-size:.66rem;letter-spacing:.1em;color:var(--glow);text-transform:uppercase;flex:none}
+.clip figcaption span{min-width:0}
+.snd{position:absolute;right:10px;bottom:10px;border:1px solid var(--line);background:rgba(7,8,10,.75);border-radius:3px;padding:5px 9px;font-family:var(--mono);font-size:.64rem;letter-spacing:.08em;text-transform:uppercase;display:inline-flex;align-items:center;gap:6px;color:var(--paper)}
+.snd svg{width:14px;height:14px}
+.snd[aria-pressed="true"]{border-color:var(--glow);color:var(--glow)}
+.badge{position:absolute;left:10px;top:10px;background:rgba(0,0,0,.7);padding:2px 8px;font-family:var(--mono);font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--glow);pointer-events:none}
+.stills{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;padding-block:4px}
+.stills::-webkit-scrollbar{display:none}
+.stills figure{flex:0 0 min(78%,420px);scroll-snap-align:start;margin:0;display:flex;flex-direction:column;gap:6px}
+.stills .fr{position:relative;aspect-ratio:16/10;overflow:hidden;max-width:100%}
+.stills img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;max-width:none}
+.stills figcaption{font-size:.82rem;color:var(--muted)}
+
+/* Reel */
+.reel{position:relative;aspect-ratio:16/9;max-width:100%;overflow:hidden}
+.reel video{position:absolute;inset:0;width:100%;height:100%;background:#000;display:block}
+
+/* 3D viewer */
+.vw{position:relative;aspect-ratio:4/5;max-width:100%;overflow:hidden;user-select:none;-webkit-user-select:none;
+  background:radial-gradient(90% 70% at 50% 40%,color-mix(in srgb,var(--sh) 90%,#0a0b0e),#030405 75%)}
+@media (min-width:640px){.vw{aspect-ratio:16/10}}
+.vw:fullscreen{aspect-ratio:auto;width:100vw;height:100vh;border:0}
+.vw canvas{position:absolute;inset:0;width:100%;height:100%;display:block;max-width:none;cursor:grab;touch-action:none}
+.vw canvas:active{cursor:grabbing}
+.vw .hud{position:absolute;left:12px;top:10px;right:12px;display:flex;justify-content:space-between;align-items:flex-start;gap:10px;pointer-events:none;color:var(--muted);font-size:.62rem}
+.vw .hud b{color:var(--glow);font-weight:400}
+.vw .hud .r{display:flex;gap:6px;pointer-events:auto}
+.ib{width:34px;height:34px;display:grid;place-items:center;border:1px solid var(--line);background:rgba(7,8,10,.72);border-radius:3px;color:var(--paper);padding:0}
+.ib svg{width:17px;height:17px}
+.ib[aria-pressed="true"]{border-color:var(--glow);color:var(--glow)}
+.vw .load{position:absolute;left:12px;right:12px;bottom:12px;display:flex;flex-direction:column;gap:6px;pointer-events:none}
+.vw .load .bar{height:3px;background:var(--line)}
+.vw .load i{display:block;height:100%;width:0;background:var(--glow);transition:width .25s}
+.vw .load span{color:var(--muted);font-size:.62rem}
+.vw .hint{position:absolute;left:50%;bottom:14px;transform:translateX(-50%);background:rgba(0,0,0,.7);padding:4px 10px;white-space:nowrap;pointer-events:none;transition:opacity .6s;color:var(--paper);font-size:.6rem;max-width:calc(100% - 24px);overflow:hidden;text-overflow:ellipsis}
+.vw .err{position:absolute;inset:0;display:grid;place-items:center;text-align:center;padding:24px;color:var(--muted)}
+.ctl{display:flex;flex-direction:column;gap:10px}
+.seg{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.seg .lab{color:var(--muted);min-width:4.4em;font-size:.62rem}
+.chip{border:1px solid var(--line);background:var(--panel);border-radius:3px;padding:8px 11px;font-family:var(--mono);font-size:.68rem;letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+.chip[aria-pressed="true"]{border-color:var(--dom);color:var(--void);background:var(--glow)}
+.chip.part[aria-pressed="false"]{text-decoration:line-through;opacity:.6}
+.chip .sw{display:inline-block;width:.7em;height:.7em;margin-right:.45em;vertical-align:-.05em;border:1px solid rgba(255,255,255,.3)}
+.tabs{display:flex;gap:0;border:1px solid var(--line);align-self:flex-start;border-radius:3px;overflow:hidden}
+.tabs button{border:0;background:var(--panel);padding:10px 18px;font-family:var(--display);font-variation-settings:"wdth" 75;font-weight:800;text-transform:uppercase;font-size:1.2rem;letter-spacing:.01em;color:var(--muted)}
+.tabs button[aria-pressed="true"]{color:var(--void);background:var(--glow)}
+.facts{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin:0}
+@media (max-width:520px){.facts{grid-template-columns:repeat(2,1fr)}}
+.facts div{background:var(--void);padding:10px 10px 12px;min-width:0}
+.facts dt{font-family:var(--mono);font-size:.6rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.facts dd{margin:2px 0 0;font-family:var(--display);font-variation-settings:"wdth" 75;font-weight:700;font-size:1.5rem;line-height:1;color:var(--glow);font-variant-numeric:tabular-nums}
+.vnote{font-size:.86rem;color:var(--muted)}
+
+/* Credits + contact */
+.credits{display:grid;gap:1px;background:var(--line);border:1px solid var(--line)}
+@media (min-width:640px){.credits{grid-template-columns:1fr 1fr}}
+.credits div{background:var(--void);padding:12px 14px;min-width:0}
+.credits dt{font-family:var(--mono);font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.credits dd{margin:3px 0 0;font-size:.92rem}
+.contact{display:grid;gap:1px;background:var(--line);border:1px solid var(--line)}
+@media (min-width:640px){.contact{grid-template-columns:1fr 1fr}}
+.contact > *{background:var(--void);padding:14px 16px;display:flex;justify-content:space-between;align-items:center;gap:12px;min-width:0;text-decoration:none;color:var(--paper)}
+.contact .k{font-family:var(--mono);font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.contact .v{overflow-wrap:anywhere;user-select:all;-webkit-user-select:all}
+.copy{background:none;border:1px solid var(--line);border-radius:3px;padding:5px 10px;font-family:var(--mono);font-size:.7rem;color:var(--muted);flex:none}
+footer{padding-block:20px 44px;display:flex;flex-direction:column;align-items:center;gap:12px;text-align:center}
+footer .eye{width:92px;height:92px}
+footer .mono{color:var(--muted);font-size:.62rem}
+
+/* Edit mode (owner only) */
+[data-k]{outline:none;border-radius:2px}
+.editing [data-k]{background:rgba(127,211,255,.08);box-shadow:inset 0 -1px 0 rgba(127,211,255,.4)}
+.editing [data-k]:focus{background:rgba(127,211,255,.18)}
+.editing [data-k]:empty::before{content:attr(data-ph);opacity:.45}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
+</style>
+
+<div id="app"></div>
+
+<script id="state" type="application/json">{"name": "Auro Salmon", "title": "3D Generalist · FX & Technical Art", "pitch": "I model, rig and animate stylised characters, simulate things in Houdini, and build my own tools when the ones I need don't exist. Finishing at The Animation School, Johannesburg, in 2026.", "email": "auro.anim@gmail.com", "phone": "", "links": [["LinkedIn", "https://www.linkedin.com/in/auro-salmon-234822201"], ["The Rookies", "https://www.therookies.co/u/Bindo"], ["ArtStation", "https://www.artstation.com/aurosalmon"]], "music": "270e5aa61d180994d1f50015df32cf0e", "logo": {"video": "bb431edf8ca17791467aedb0f9dd4b16", "poster": "9b26550ff106c9178afee987a9b1f4cc"}, "reel": {"video": "0b54c5ea478668951083947d8508ab0a", "poster": "b8b80600471b932dcf66ad90b10de2cf", "note": "The full reel, 79 seconds. Every shot carries a credit band with what I did on it and the software I used."}, "models": {"mirei": {"name": "Mirei", "data": "cf88e84fe4060610d07ffdc3c762e557", "front": -1, "note": "Real production mesh, straight from Maya. Colour view is a flat blockout of her palette; her painted textures are still in progress, so the UV view shows the nine-tile UDIM layout instead.", "parts": {"skin": ["Skin", "#e2b69c"], "hair": ["Hair (Tuft)", "#97ab4c"], "brows": ["Brows", "#3d4a1c"], "eyes": ["Eyes", "#ece9e1"], "shirt": ["Shirt", "#2a2d33"], "pants": ["Cargo pants", "#59684a"], "laces": ["Laces", "#e4dfd3"], "shoes": ["Boots", "#d9d4c7"], "bag": ["Backpack", "#33363d"], "speakers": ["Speakers", "#16171a"], "phones": ["Headphones", "#e6e3da"], "metal": ["Hardware", "#a7acb3"]}, "hue": "#5ff2c0"}, "sid": {"name": "Sid", "data": "eb067cff6c214674369ebf1ff930bb65", "front": 1, "note": "Textured with his hand-painted base colour maps, one UDIM tile per material.", "tex": {"Accessories": "034e267c0faf6da926053be14e724146", "Comb": "d53420a255d5cc7861baa18adcf4c2c7", "Eyeballs": "0ac4670f5aff738870360375110cd874", "Gum": "f100f4ece614953e31b0c8310df15c05", "Hair": "f018a774bef1e577573d3da8122da198", "Head": "198cd38d1a60a24179ecfcd4982ccccf", "Legs": "6b1f4051bce3747bcd57427d18f40251", "Rings": "38a4cdf38aa28a3f32265a74c81973d2", "Shirt": "cde47a7b65c7b5f2eb06fe57adb042bb", "TeethTongue": "4f36eedc0c865049fc96fbc18f4f06e6"}, "parts": {"Head": ["Head & hands"], "Hair": ["Hair"], "Eyeballs": ["Eyes"], "Shirt": ["Shirt"], "Legs": ["Legs"], "Comb": ["Comb"], "Accessories": ["Glasses & ears"], "Lens": ["Lenses", "#cfe3f0"], "Rings": ["Rings"], "Gum": ["Gums"], "TeethTongue": ["Teeth & tongue"]}, "hue": "#ffb3bd"}, "y1": {"name": "Sail cart", "data": "1b879be052e168bead4340ffe91751b9", "front": 1, "frame": "scene", "isolate": true, "hue": "#8fa8ff", "note": "Year 1 modelling assignment, built in Maya 2024: 353 meshes, every one of them quads. Pick a prop to isolate it and orbit around it on its own. Colour view is a flat blockout from the scene's material names; the scene has no textures.", "mats": {"Attatch": "#8d9299", "Axle": "#6e737a", "Bamboo_mast": "#c9b25a", "Bamboo_side": "#b8a24e", "Bolt": "#9aa0a6", "Bolt1": "#9aa0a6", "Bulb": "#ffd27a", "Candle": "#7fc4ff", "Cards": "#f1ece1", "Cupboard": "#9b6a43", "Cushion": "#b5423a", "Cushion1": "#b5423a", "Cutting_board": "#c39a68", "Default": "#a49d90", "Drawers": "#8a5a37", "Flag": "#d8321e", "Flag_pins": "#a7acb3", "Front_panel": "#7a5236", "Gear": "#b08d3c", "Hatch": "#7a5236", "Hinge": "#8d9299", "Hinge2": "#8d9299", "Horseshoe": "#8d9299", "Icing": "#f6f0f4", "Pan": "#3a3d42", "Pin_body": "#d1a873", "Plate": "#ecebe6", "Rim": "#6b4a32", "Rings": "#b08d3c", "Roof": "#5c3d2a", "Rope": "#c7ab7a", "Sail": "#ece3cc", "Seat": "#b5423a", "Slabs": "#a87650", "Small_bolts": "#9aa0a6", "Stash": "#8f7a55", "Steering_Wheel_rim": "#8a5a37", "Table": "#a87650", "Walls": "#b98b5e", "Window": "#bfe3f2", "Window_stand": "#6b4a32", "cake": "#e89bb0", "drawstring": "#d9c9a3", "floor": "#8f7f6a", "mast_supp": "#8d9299", "seats": "#a87650", "tires": "#26272b"}, "metal": ["Attatch", "Axle", "Bolt", "Bolt1", "Flag_pins", "Gear", "Hinge", "Hinge2", "Horseshoe", "Pan", "Rings", "Small_bolts", "mast_supp"], "glow": ["Bulb"], "propColor": {"Ground": "#2b2925"}, "labels": {"Shoes": "Roller skates"}, "order": ["Cart body", "Shoes", "Wheels", "Sail & mast", "Steering wheel", "Driver chair", "Steering gear", "Cupboard", "Fold-down table", "Barstools", "Birthday cake", "Rolling-pin lamp", "Bench seats", "Back window", "Front hatch", "Stash bags", "Spare tyre", "Ground"]}}, "mirei": {"role": "Animation / Rigging / Modelling", "soft": "Blender · Maya 2025 · Arnold", "note": "Mirei is a sound girl: speaker-cone backpack, horns and headphones. I modelled and retopologised her, unwrapped her across nine UDIM tiles, built her body and face rig, and animated her.", "clips": [["Intro", "14c2824740d7c7a5bba8ee254a63d4f0", "61b027efbfd940b9f4ce04c3d1e6258b", 0], ["Wireframe turntable", "2eee4c89f5118c0b62e46dc186f5b582", "0a548c97534917cd857e6ad6e4baebb4", 0], ["Acting: Prodigal Son dialogue", "f43147242bccd6ffc15212c4d266ac6e", "a7d37ee4a277c1052392f145d146a99b", 1]], "stills": [["971f3da91698dd3f1722f1d951b5b252", "Clay turntable, rendered on the exhibition plinth."], ["061473fd50256dacb49f7f367ff0b4ee", "UV checker, front, back and side. Even texel density at 35 px/cm across nine UDIM tiles."]]}, "sid": {"role": "Character modelling / Rigging / Animation / Textures", "soft": "Maya 2025 · Arnold", "note": "Sid lounges on a shelf with a flat pink heart behind him. I modelled, rigged, textured and animated him.", "clips": [["Intro", "3b333e90ccadceddab275fe22b0aff5a", "e0be8a5971715c5a32b4fc7a30b63c32", 0], ["Wireframe turntable", "e27fbfb7d6b8535ae5de9ad357c7160a", "d9986980eea1bbd3701342866aeaf7ae", 0]]}, "engines": {"role": "Animation / Bike modelling & rigging / Houdini sims / Scene compilation / Rendering & compositing", "soft": "Houdini · Maya · Arnold", "note": "One shot, start to finish, made in an 80-hour placement at Chocolate Tribe.", "clips": [["Final shot", "262f4293670f505a1d931e171518ec12", "d6265e66486463216b3ff3a0deefc9b6", 1]]}, "wwcd": {"role": "Compositing / Animation", "soft": "Maya 2025 · Nuke", "note": "Group film. The two wipes build each shot from previs through my comp passes to the final frame; Sc01_Sh16 is my animation.", "clips": [["Sc01_Sh05 comp breakdown", "5a8bc77b37be35a178939db009c4db92", "68279135c7f8c4b6caeab5f8bb28e9b2", 0], ["Sc02_Sh22 comp breakdown", "20cb80ed0f226a7e040aaa8e60e3eb28", "0776c644a72c4c2b4fb89f99222c2739", 0], ["Sc01_Sh16 animation", "33eb7c9d58a60a5e2cf3e5f0811995ac", "9a4ce78fb91eb917717804095aa6159a", 0]], "credits": [["Look dev & surfacing (Sc01_Sh16)", "Carmen Reineke"], ["Character modelling & texturing", "Jedidiah Strydom, Desire Munonyara"], ["Rigging", "Ramon Arango, Vonne Hatting, Jedidiah Strydom"], ["Lighting & rendering", "Lindokuhle Malekane"]]}, "tuft": {"role": "Tool design, Python and C++ development", "soft": "Maya 2025 · Python · C++ · OpenMaya", "note": "I couldn't find a free tool that made hair the way I draw it, so I wrote one. Tuft turns hand-drawn curves into stylised hair locks you can reshape live. Mirei's hair is made with it: switch the Hair part off in the 3D viewer to see the head underneath.", "stills": [["13f707c3b4d5d2c3effaa578c501f30e", "Mirei's hair: every lock grown from a hand-drawn curve in Tuft."]]}, "y1": {"role": "Modelling", "soft": "Maya 2024", "note": "A sail-powered cart, fitted out inside: a steering wheel and driver chair, a cupboard, a fold-down card table with barstools and a birthday cake, and a rolling-pin lamp. My Year 1 modelling assignment (Y1.C2.A3)."}}</script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.147.0/build/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.147.0/examples/js/controls/OrbitControls.js"></script>
+<script id="app-js">
+(function(){
+const S = JSON.parse(document.getElementById("state").textContent);
+const RESET = ':root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}';
+const ROOMS = [["reel","Reel","iris"],["viewer","3D","iris"],["mirei","Mirei","green"],["more","Sid","crimson"],["cart","Cart","cobalt"],["comp","Engines","red"],["wwcd","WWCD","amber"],["tuft","Tuft","violet"],["contact","Hi","iris"]];
+const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+let editing = false, dirty = false, saving = false, artifactApi = null;
+const app = document.getElementById("app");
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const get = p => p.split(".").reduce((o,k) => o == null ? o : o[k], S);
+function set(p, v){ const ks = p.split("."); const last = ks.pop(); ks.reduce((o,k) => o[k], S)[last] = v; }
+const FILES = {"cf88e84fe4060610d07ffdc3c762e557": "mirei.m3d.txt", "eb067cff6c214674369ebf1ff930bb65": "sid.m3d.txt", "1b879be052e168bead4340ffe91751b9": "y1.m3d.txt", "0b54c5ea478668951083947d8508ab0a": "reel.mp4", "b8b80600471b932dcf66ad90b10de2cf": "poster_reel.jpg", "bb431edf8ca17791467aedb0f9dd4b16": "bindo.mp4", "9b26550ff106c9178afee987a9b1f4cc": "poster_bindo.jpg", "270e5aa61d180994d1f50015df32cf0e": "music.mp4", "262f4293670f505a1d931e171518ec12": "engines.mp4", "d6265e66486463216b3ff3a0deefc9b6": "poster_engines.jpg", "3b333e90ccadceddab275fe22b0aff5a": "sid_intro.mp4", "e0be8a5971715c5a32b4fc7a30b63c32": "poster_sid_intro.jpg", "e27fbfb7d6b8535ae5de9ad357c7160a": "sid_wire.mp4", "d9986980eea1bbd3701342866aeaf7ae": "poster_sid_wire.jpg", "14c2824740d7c7a5bba8ee254a63d4f0": "mirei_intro.mp4", "61b027efbfd940b9f4ce04c3d1e6258b": "poster_mirei_intro.jpg", "2eee4c89f5118c0b62e46dc186f5b582": "mirei_wire.mp4", "0a548c97534917cd857e6ad6e4baebb4": "poster_mirei_wire.jpg", "5a8bc77b37be35a178939db009c4db92": "wwcd_comp1.mp4", "68279135c7f8c4b6caeab5f8bb28e9b2": "poster_wwcd_comp1.jpg", "20cb80ed0f226a7e040aaa8e60e3eb28": "wwcd_comp2.mp4", "0776c644a72c4c2b4fb89f99222c2739": "poster_wwcd_comp2.jpg", "33eb7c9d58a60a5e2cf3e5f0811995ac": "wwcd_sh16.mp4", "9a4ce78fb91eb917717804095aa6159a": "poster_wwcd_sh16.jpg", "f43147242bccd6ffc15212c4d266ac6e": "mire_acting.mp4", "a7d37ee4a277c1052392f145d146a99b": "poster_mire_acting.jpg", "034e267c0faf6da926053be14e724146": "sid_Accessories.jpg", "d53420a255d5cc7861baa18adcf4c2c7": "sid_Comb.jpg", "0ac4670f5aff738870360375110cd874": "sid_Eyeballs.jpg", "f100f4ece614953e31b0c8310df15c05": "sid_Gum.jpg", "f018a774bef1e577573d3da8122da198": "sid_Hair.jpg", "198cd38d1a60a24179ecfcd4982ccccf": "sid_Head.jpg", "6b1f4051bce3747bcd57427d18f40251": "sid_Legs.jpg", "38a4cdf38aa28a3f32265a74c81973d2": "sid_Rings.jpg", "cde47a7b65c7b5f2eb06fe57adb042bb": "sid_Shirt.jpg", "4f36eedc0c865049fc96fbc18f4f06e6": "sid_TeethTongue.jpg", "971f3da91698dd3f1722f1d951b5b252": "mirei_clay_turntable.webp", "061473fd50256dacb49f7f367ff0b4ee": "mirei_uv_checker.webp", "13f707c3b4d5d2c3effaa578c501f30e": "tuft_hair.webp"};
+const src = id => !id ? "" : (/^(https?:|data:|blob:|\/)/.test(id) ? id : "assets/" + (FILES[id] || id));
+const store = { get(k){ try { return localStorage.getItem(k); } catch(_){ return null; } }, set(k,v){ try { localStorage.setItem(k,v); } catch(_){} } };
+function ed(path, ph, tag, ml){
+  tag = tag || "span"; const v = get(path);
+  if (!editing) return v ? `<${tag}>${esc(v)}</${tag}>` : "";
+  return `<${tag} data-k="${path}" data-ph="${esc(ph||"")}"${ml ? ' data-ml="1"' : ""} contenteditable="plaintext-only" spellcheck="true">${esc(v)}</${tag}>`;
+}
+const I = {
+  sound:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H2v6h4l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M19 5a10 10 0 0 1 0 14"/></svg>',
+  mute:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H2v6h4l5 4z"/><path d="m22 9-6 6M16 9l6 6"/></svg>',
+  full:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg>',
+  spin:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-3-6.7"/><path d="M21 3v6h-6"/></svg>',
+  home:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/></svg>'
+};
+
+/* The eye: sclera, veins, cyan iris rings, speaker-cone pupil, sparkle. */
+function eyeSvg(cls){
+  let veins = ""; for (let i = 0; i < 9; i++){ const a = i * .7 + .3, r1 = 44, r2 = 27 + (i % 3) * 3, x1 = 50 + Math.cos(a) * r1, y1 = 50 + Math.sin(a) * r1, x2 = 50 + Math.cos(a + .18) * r2, y2 = 50 + Math.sin(a + .18) * r2, mx = 50 + Math.cos(a + .05) * (r1 + r2) / 2, my = 50 + Math.sin(a - .08) * (r1 + r2) / 2;
+    veins += `<path d="M${x1.toFixed(1)} ${y1.toFixed(1)}L${mx.toFixed(1)} ${my.toFixed(1)}L${x2.toFixed(1)} ${y2.toFixed(1)}" />`; }
+  return `<svg class="${cls}" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="46" fill="#e9e7e0" stroke="#000" stroke-width="3"/>
+  <path d="M50 4a46 46 0 0 1 0 92a54 54 0 0 0 0-92z" fill="#000" opacity=".22"/>
+  <g fill="none" stroke="#c4122f" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" opacity=".8">${veins}</g>
+  <g class="iris"><circle cx="50" cy="50" r="23" fill="#7fd3ff" stroke="#000" stroke-width="3"/><circle cx="50" cy="50" r="18" fill="none" stroke="#06212e" stroke-width="1.5" opacity=".55"/><circle cx="50" cy="50" r="14" fill="none" stroke="#06212e" stroke-width="1.5" opacity=".55"/>
+  <circle cx="50" cy="50" r="10.5" fill="#07080a"/><circle cx="50" cy="50" r="6.5" fill="none" stroke="#3a3d44" stroke-width="1.5"/><circle cx="50" cy="50" r="3" fill="#3a3d44"/>
+  <path d="M40 34l1.6 5.4L47 41l-5.4 1.6L40 48l-1.6-5.4L33 41l5.4-1.6z" fill="#fff"/></g>
+  <rect class="lid" x="0" y="0" width="100" height="0" fill="#07080a"/></svg>`;
+}
+function head(slate, title, key){
+  return `<div class="mono slate">${slate}</div><div class="cut"><h2>${title}</h2></div>
+  <div class="role"><b>My role</b><br>${ed(key + ".role","What you did")}</div>
+  <div class="tags">${String(get(key + ".soft") || "").split("·").map(t => t.trim()).filter(Boolean).map(t => `<span class="tag">${esc(t)}</span>`).join("")}</div>`;
+}
+function clips(key){
+  return (get(key + ".clips") || []).map((c,i) => `<figure class="clip"><div class="fr lit"><video data-clip muted loop playsinline preload="none" poster="${esc(src(c[2]))}" src="${esc(src(c[1]))}" aria-label="${esc(c[0])}"></video>
+    ${c[3] ? `<button type="button" class="snd" data-snd aria-pressed="false">${I.mute}<span>Sound off</span></button>` : ""}</div>
+    <figcaption><b>${String(i+1).padStart(2,"0")}</b><span>${esc(c[0])}</span></figcaption></figure>`).join("");
+}
+function stills(key){
+  const l = get(key + ".stills") || []; if (!l.length) return "";
+  return `<div class="stills">${l.map(s => `<figure><div class="fr lit"><img src="${esc(src(s[0]))}" alt="${esc(s[1])}" loading="lazy" draggable="false"></div><figcaption>${esc(s[1])}</figcaption></figure>`).join("")}</div>`;
+}
+const viewBtn = m => `<a class="btn hue" href="#viewer" data-open="${m}">Turn ${m === "mirei" ? "her" : "him"} around in 3D</a>`;
+
+function page(){
+  return `
+<header class="top"><div class="in">${eyeSvg("eye")}
+  <div class="who">${esc(S.name)}<small>${esc(S.title)}</small></div>
+  <div class="tools"><button type="button" class="tb music" id="musicBtn" aria-pressed="false" aria-label="Background music"><span class="bars" aria-hidden="true"><i></i><i></i><i></i></span><span id="musicLab">Music off</span></button>
+  <button type="button" class="tb" id="editBtn" ${artifactApi ? "" : "hidden"} aria-pressed="${editing}">${editing ? "Done" : "Edit"}</button></div></div>
+  <nav class="strip" aria-label="Sections">${ROOMS.map(r => `<a class="h-${r[2]}" href="#${r[0]}" data-room="${r[0]}">${r[1]}</a>`).join("")}</nav>
+  <div class="editbar in" ${editing || dirty ? "" : "hidden"}><span class="status${dirty ? " dirty" : ""}" id="status">${dirty ? "Unsaved changes" : "Tap any text to change it. Only you see this."}</span>
+    <button type="button" class="tb primary" id="saveBtn" ${dirty && !saving ? "" : "disabled"} style="margin-left:auto">Save changes</button></div>
+</header>
+<main class="page">
+<section class="hero in h-iris" id="top">
+  <div class="hero-grid"><div class="ctl" style="gap:16px">
+    <h1 class="name"><span>${ed("name","Your name")}</span></h1>
+    <p class="pitch">${ed("pitch","Two lines about you","span",true)}</p>
+    <div class="cta"><a class="btn primary" href="#reel">▶ Watch the reel</a><a class="btn" href="#viewer">Spin the 3D models</a><a class="btn" href="#contact">Get in touch</a></div></div>
+    <div class="logo lit"><video data-clip muted loop playsinline autoplay preload="auto" poster="${esc(src(S.logo.poster))}" src="${esc(src(S.logo.video))}" aria-label="BINDO logo animation, hand drawn"></video></div>
+  </div>
+</section>
+
+<section class="in h-iris" id="reel">
+  <div class="mono slate">Showreel · 2026</div><div class="cut"><h2>Reel</h2></div>
+  <p class="muted">${ed("reel.note","What's in the reel","span",true)}</p>
+  <div class="reel lit"><video id="reelVid" controls playsinline preload="metadata" poster="${esc(src(S.reel.poster))}" src="${esc(src(S.reel.video))}"></video></div>
+</section>
+
+<section class="in h-iris" id="viewer">
+  <div class="mono slate">Real production meshes · any angle</div><div class="cut"><h2>3D viewer</h2></div>
+  <div class="tabs" role="group" aria-label="Model"><button type="button" data-model="mirei" aria-pressed="true">Mirei</button><button type="button" data-model="sid" aria-pressed="false">Sid</button><button type="button" data-model="y1" aria-pressed="false">Cart</button></div>
+  <div id="vwSlot"></div>
+  <div class="ctl">
+    <div class="seg" role="group" aria-label="View mode"><span class="mono lab">View</span><span id="modeChips" class="seg"></span></div>
+    <div class="seg" role="group" aria-label="Camera"><span class="mono lab">Camera</span>${[["front","Front"],["side","Side"],["back","Back"],["top","Top"],["under","Below"]].map(v => `<button type="button" class="chip" data-cam="${v[0]}">${v[1]}</button>`).join("")}</div>
+    <div class="seg" role="group" aria-label="Parts"><span class="mono lab" id="partLab">Parts</span><span id="partChips" class="seg"></span></div>
+  </div>
+  <dl class="facts" id="vwFacts"><div><dt>Polygons</dt><dd>–</dd></div><div><dt>Triangles</dt><dd>–</dd></div><div><dt>Vertices</dt><dd>–</dd></div><div><dt>Parts</dt><dd>–</dd></div></dl>
+  <p class="vnote" id="vwNote"></p>
+</section>
+
+<section class="in h-green" id="mirei">
+  ${head("Character · Mirei","Mirei","mirei")}
+  <p class="muted">${ed("mirei.note","About this piece","span",true)}</p>
+  <div class="two">${clips("mirei")}</div>
+  ${stills("mirei")}
+  <div class="cta">${viewBtn("mirei")}</div>
+</section>
+
+<section class="in h-crimson" id="more">
+  ${head("Character · Sid","Sid","sid")}
+  <p class="muted">${ed("sid.note","About this piece","span",true)}</p>
+  <div class="two">${clips("sid")}</div>
+  <div class="cta">${viewBtn("sid")}</div>
+</section>
+
+<section class="in h-cobalt" id="cart">
+  ${head("Environment · Year 1 modelling","Sail<br>cart","y1")}
+  <p class="muted">${ed("y1.note","About this scene","span",true)}</p>
+  <div class="cta"><a class="btn hue" href="#viewer" data-open="y1" data-prop="all">Explore the whole scene in 3D</a></div>
+  <div class="mono slate" style="margin-top:6px">Props · tap one to isolate it</div>
+  <div class="seg">${S.models.y1.order.filter(n => n !== "Ground").map(n => `<a class="chip" href="#viewer" data-open="y1" data-prop="${esc(n)}">${esc((S.models.y1.labels || {})[n] || n)}</a>`).join("")}</div>
+</section>
+
+<section class="in h-red" id="comp">
+  ${head("Shot · Chocolate Tribe placement","Endless<br>Engines","engines")}
+  <p class="muted">${ed("engines.note","About this shot","span",true)}</p>
+  ${clips("engines")}
+</section>
+
+<section class="in h-amber" id="wwcd">
+  ${head("Short film · group project","WWCD","wwcd")}
+  <p class="muted">${ed("wwcd.note","About this film","span",true)}</p>
+  <div class="two">${clips("wwcd")}</div>
+  <div class="mono slate" style="margin-top:6px">Collaborators</div>
+  <dl class="credits">${S.wwcd.credits.map(c => `<div><dt>${esc(c[0])}</dt><dd>${esc(c[1])}</dd></div>`).join("")}</dl>
+</section>
+
+<section class="in h-violet" id="tuft">
+  ${head("Tool · Maya plug-in","Tuft","tuft")}
+  <p class="muted">${ed("tuft.note","About this tool","span",true)}</p>
+  <dl class="facts"><div><dt>Locks, live</dt><dd>40</dd></div><div><dt>Slider drag</dt><dd>32 ms</dd></div><div><dt>Faster in C++</dt><dd>20×</dd></div><div><dt>Mirei strands</dt><dd>78</dd></div></dl>
+  ${stills("tuft")}
+  <div class="cta"><a class="btn hue" href="#viewer" data-open="mirei" data-solo="hair">See Tuft hair in 3D</a></div>
+</section>
+
+<section class="in h-iris" id="contact">
+  <div class="mono slate">Contact</div><div class="cut"><h2>Say hi</h2></div>
+  <p class="muted">Met me at industry night? I'm looking for a junior generalist, animation, FX or technical art role.</p>
+  <div class="contact">
+    <div><span style="min-width:0"><span class="k">Email</span><br><span class="v">${editing ? ed("email","you@email.com") : esc(S.email)}</span></span><button type="button" class="copy" data-copy="email">Copy</button></div>
+    ${S.phone || editing ? `<div><span style="min-width:0"><span class="k">Phone</span><br><span class="v">${editing ? ed("phone","Optional") : esc(S.phone)}</span></span>${S.phone ? `<button type="button" class="copy" data-copy="phone">Copy</button>` : ""}</div>` : ""}
+    ${S.links.filter(l => /^https:\/\//.test(l[1])).map(l => `<a href="${esc(l[1])}" target="_blank" rel="noopener"><span style="min-width:0"><span class="k">${esc(l[0])}</span><br><span class="v">${esc(l[1].replace(/^https?:\/\/(www\.)?/,""))}</span></span><span aria-hidden="true">↗</span></a>`).join("")}
+  </div>
+</section>
+<footer class="in">${eyeSvg("eye")}<div class="mono">${esc(S.name)} · Lit from within · 2026</div><div class="mono">Music: original track made for the reel</div></footer>
+</main>`;
+}
+
+/* ---------- Background music: off until the viewer turns it on; steps aside for any video playing with sound ---------- */
+const MUS = { on:false, el:null, loud:new Set(), fade:0 };
+function musicEl(){
+  if (MUS.el) return MUS.el;
+  const v = document.createElement("video"); v.src = src(S.music); v.loop = true; v.playsInline = true; v.setAttribute("playsinline",""); v.preload = "auto"; v.hidden = true; v.volume = 0;
+  document.body.appendChild(v); MUS.el = v; return v;
+}
+function musicTarget(){ return MUS.on && !MUS.loud.size && !document.hidden; }
+function musicSync(){
+  const v = MUS.el; if (!v) return; cancelAnimationFrame(MUS.fade);
+  const want = musicTarget(), goal = want ? .55 : 0;
+  if (want && v.paused){ v.play().catch(() => { MUS.on = false; musicUi(); }); }
+  (function step(){ const d = goal - v.volume; if (Math.abs(d) < .02){ try { v.volume = goal; } catch(_){} if (!want) v.pause(); return; } try { v.volume = Math.max(0, Math.min(1, v.volume + Math.sign(d) * .03)); } catch(_){ if (!want) v.pause(); return; } MUS.fade = requestAnimationFrame(step); })();
+}
+function musicUi(){
+  const b = document.getElementById("musicBtn"); if (!b) return;
+  b.classList.toggle("on", MUS.on); b.setAttribute("aria-pressed", String(MUS.on));
+  document.getElementById("musicLab").textContent = MUS.on ? (MUS.loud.size ? "Music paused" : "Music on") : "Music off";
+}
+function musicToggle(){ MUS.on = !MUS.on; musicEl(); store.set("auro-music", MUS.on ? "1" : "0"); musicSync(); musicUi(); }
+function loud(key, isLoud){ if (isLoud) MUS.loud.add(key); else MUS.loud.delete(key); musicSync(); musicUi(); }
+document.addEventListener("visibilitychange", musicSync);
+
+/* ---------- Clips: play muted while on screen; sound button per clip ---------- */
+let clipIO = null;
+function setupClips(){
+  if (clipIO) clipIO.disconnect();
+  clipIO = new IntersectionObserver(es => es.forEach(e => { const v = e.target; if (e.isIntersecting && !reduce){ v.play().catch(() => {}); } else if (!e.isIntersecting){ v.pause(); if (!v.muted){ v.muted = true; syncSnd(v); } } }), { threshold:.5 });
+  document.querySelectorAll("video[data-clip]").forEach(v => { clipIO.observe(v); if (reduce){ v.controls = true; v.removeAttribute("autoplay"); } });
+  const r = document.getElementById("reelVid");
+  if (r){ const upd = () => loud("reel", !r.paused && !r.muted && r.volume > 0); ["play","pause","ended","volumechange"].forEach(t => r.addEventListener(t, upd)); }
+}
+function syncSnd(v){
+  const b = v.parentElement.querySelector("[data-snd]"); if (!b) return;
+  b.setAttribute("aria-pressed", String(!v.muted)); b.innerHTML = (v.muted ? I.mute : I.sound) + `<span>${v.muted ? "Sound off" : "Sound on"}</span>`;
+  loud(v.currentSrc || v.src, !v.muted && !v.paused);
+}
+
+/* ---------- 3D viewer ---------- */
+const VW = { model:"mirei", mode:"color", parts:{}, focus:{}, auto:!reduce };
+const MODES = [["color","Colour"],["clay","Clay"],["wire","Wireframe"],["claywire","Clay + wire"],["matcap","Matcap"],["normals","Normals"],["uv","UV checker"]];
+const vwBox = document.createElement("div"); vwBox.className = "vw lit";
+vwBox.innerHTML = `<canvas aria-label="3D model viewer. Drag to orbit, pinch or scroll to zoom, two fingers or right-drag to pan, double-tap to focus."></canvas>
+  <div class="mono hud"><span><b id="vwName">Mirei</b> · <span id="vwMode">Colour</span></span><span class="r">
+    <button type="button" class="ib" id="vwAuto" aria-pressed="${VW.auto}" aria-label="Auto-rotate" title="Auto-rotate">${I.spin}</button>
+    <button type="button" class="ib" id="vwHome" aria-label="Reset camera" title="Reset camera">${I.home}</button>
+    <button type="button" class="ib" id="vwFull" aria-label="Fullscreen" title="Fullscreen">${I.full}</button></span></div>
+  <div class="load"><span class="mono" id="vwLoadTxt">Loading mesh</span><div class="bar"><i id="vwBar"></i></div></div>
+  <span class="mono hint" id="vwHint" hidden>Drag to orbit · pinch to zoom · two fingers to pan · double-tap to focus</span>`;
+(function(){
+  const cv = vwBox.querySelector("canvas"), bar = vwBox.querySelector("#vwBar"), loadBox = vwBox.querySelector(".load"), loadTxt = vwBox.querySelector("#vwLoadTxt");
+  let renderer, scene, cam, controls, root, ground, ring, visible = true, need = true, started = false, fly = null, idleT = 0;
+  const cache = {}, texCache = {};
+  const C = { clay:"#c9c5bb", wireFill:"#0a0c0f" };
+
+  function canvasTex(w, draw){ const c = document.createElement("canvas"); c.width = c.height = w; draw(c.getContext("2d"), w); const t = new THREE.CanvasTexture(c); t.encoding = THREE.sRGBEncoding; return t; }
+  const checker = () => texCache.chk || (texCache.chk = (() => { const t = canvasTex(1024, (g, w) => {
+    const n = 8, s = w / n; for (let y = 0; y < n; y++) for (let x = 0; x < n; x++){ g.fillStyle = (x + y) % 2 ? "#1d2330" : "#e9edf2"; g.fillRect(x*s, y*s, s, s); }
+    g.strokeStyle = "#7fd3ff"; g.lineWidth = 3; g.strokeRect(1.5,1.5,w-3,w-3);
+    g.font = `600 ${s*.32}px monospace`; g.textAlign = "center"; g.textBaseline = "middle";
+    for (let y = 0; y < n; y++) for (let x = 0; x < n; x++){ g.fillStyle = (x + y) % 2 ? "#7fd3ff" : "#1d2330"; g.fillText(String.fromCharCode(65 + x) + (n - y), x*s + s/2, y*s + s/2); }
+  }); t.wrapS = t.wrapT = THREE.RepeatWrapping; t.repeat.set(2, 2); t.anisotropy = 4; return t; })());
+  const matcapTex = () => texCache.mc || (texCache.mc = canvasTex(256, (g, w) => {
+    const gr = g.createRadialGradient(w*.38, w*.32, w*.02, w*.5, w*.5, w*.52); gr.addColorStop(0, "#fff8ec"); gr.addColorStop(.35, "#d7a98a"); gr.addColorStop(.75, "#6b3f37"); gr.addColorStop(1, "#1a0f12");
+    g.fillStyle = gr; g.fillRect(0, 0, w, w); const rim = g.createRadialGradient(w*.5, w*.5, w*.38, w*.5, w*.5, w*.5); rim.addColorStop(0, "rgba(127,211,255,0)"); rim.addColorStop(1, "rgba(127,211,255,.55)"); g.fillStyle = rim; g.fillRect(0, 0, w, w); }));
+  function imgTex(id){
+    if (texCache[id]) return texCache[id];
+    const t = new THREE.TextureLoader().load(src(id), () => { need = true; }); t.encoding = THREE.sRGBEncoding; t.anisotropy = 4; t.flipY = true; return texCache[id] = t;
+  }
+
+  async function fetchText(url, onp){
+    const r = await fetch(url); if (!r.ok) throw new Error("HTTP " + r.status);
+    const total = +r.headers.get("content-length") || 0;
+    if (!r.body || !total) return await r.text();
+    const rd = r.body.getReader(), parts = []; let got = 0;
+    for (;;){ const { done, value } = await rd.read(); if (done) break; parts.push(value); got += value.length; onp(got / total); }
+    return new TextDecoder().decode(await new Blob(parts).arrayBuffer());
+  }
+  async function loadModel(key){
+    if (cache[key]) return cache[key];
+    const M = S.models[key];
+    const txt = await fetchText(src(M.data), f => { bar.style.width = Math.round(f * 85) + "%"; loadTxt.textContent = "Loading " + M.name + " · " + Math.round(f * 100) + "%"; });
+    loadTxt.textContent = "Building " + M.name;
+    const bin = Uint8Array.from(atob(txt.trim()), c => c.charCodeAt(0));
+    const buf = await new Response(new Blob([bin]).stream().pipeThrough(new DecompressionStream("gzip"))).arrayBuffer();
+    const dv = new DataView(buf); if (dv.getUint32(0, true) !== 0x3144334d) throw new Error("bad data");
+    const jl = dv.getUint32(4, true), J = JSON.parse(new TextDecoder().decode(new Uint8Array(buf, 8, jl))), base = 8 + jl;
+    const group = new THREE.Group(), parts = {}; let polys = 0, tris = 0, verts = 0;
+    for (const p of J.parts){
+      const q = new Uint16Array(buf, base + p.pos, p.nv * 3), pos = new Float32Array(p.nv * 3);
+      for (let i = 0; i < p.nv * 3; i++) pos[i] = J.lo[i % 3] + q[i] / 65535 * J.span;
+      const nq = new Int8Array(buf, base + p.nrm, p.nv * 3), nrm = new Float32Array(p.nv * 3); for (let i = 0; i < nrm.length; i++) nrm[i] = nq[i] / 127;
+      const g = new THREE.BufferGeometry(); g.setAttribute("position", new THREE.BufferAttribute(pos, 3)); g.setAttribute("normal", new THREE.BufferAttribute(nrm, 3));
+      if (p.uv != null){ const uq = new Uint16Array(buf, base + p.uv, p.nv * 2), uv = new Float32Array(p.nv * 2); for (let i = 0; i < uv.length; i++) uv[i] = uq[i] / 65535 * p.uvmax; g.setAttribute("uv", new THREE.BufferAttribute(uv, 2)); }
+      const IA = p.i32 ? Uint32Array : Uint16Array;
+      g.setIndex(new THREE.BufferAttribute(new IA(buf.slice(base + p.tri, base + p.tri + p.nt * 3 * IA.BYTES_PER_ELEMENT)), 1));
+      const w = new THREE.BufferGeometry(); w.setAttribute("position", g.getAttribute("position")); w.setIndex(new THREE.BufferAttribute(new IA(buf.slice(base + p.edge, base + p.edge + p.ne * 2 * IA.BYTES_PER_ELEMENT)), 1));
+      const mesh = new THREE.Mesh(g), lines = new THREE.LineSegments(w, new THREE.LineBasicMaterial({ transparent:true, opacity:.6 }));
+      const prop = p.prop || p.name;
+      mesh.userData.part = p.name; group.add(mesh, lines); parts[p.name] = { mesh, lines, polys:p.polys, tris:p.nt, verts:p.nv, prop, mat:p.mat || p.name };
+      polys += p.polys; tris += p.nt; verts += p.nv;
+    }
+    if (M.front < 0) group.rotation.y = Math.PI;
+    const box = new THREE.Box3().setFromObject(group), ctr = box.getCenter(new THREE.Vector3()), size = box.getSize(new THREE.Vector3());
+    group.position.set(-ctr.x, -box.min.y, -ctr.z);
+    const holder = new THREE.Group(); holder.add(group); holder.updateMatrixWorld(true);
+    const props = {};
+    for (const P of Object.values(parts)){
+      const q = props[P.prop] || (props[P.prop] = { box:new THREE.Box3(), polys:0, tris:0, verts:0, n:0 });
+      q.box.union(new THREE.Box3().setFromObject(P.mesh)); q.polys += P.polys; q.tris += P.tris; q.verts += P.verts; q.n++;
+    }
+    const all = new THREE.Box3().setFromObject(holder);
+    return cache[key] = { holder, parts, props, all, polys, tris, verts, size, h:size.y, r:Math.max(size.x, size.z) / 2 };
+  }
+
+  function matFor(key, P, mode){
+    const M = S.models[key], over = (M.propColor || {})[P.prop], part = over ? "prop:" + P.prop : P.mat, info = over || (M.mats || M.parts)[part] || [part], col = typeof info === "string" ? info : info[1];
+    const k = key + "|" + part + "|" + mode; if (texCache[k]) return texCache[k];
+    let m;
+    if (mode === "color"){
+      const glass = /^(Lens|Window)$/.test(part), metal = /^(metal)$/.test(part) || (M.metal || []).includes(part), glow = (M.glow || []).includes(part);
+      if (M.tex && M.tex[part]) m = new THREE.MeshStandardMaterial({ map:imgTex(M.tex[part]), roughness:.72, metalness:0 });
+      else m = new THREE.MeshStandardMaterial({ color:new THREE.Color(col || "#b9b4aa").convertSRGBToLinear(), roughness:metal ? .38 : .78, metalness:metal ? .55 : 0, transparent:glass, opacity:glass ? .35 : 1,
+        emissive:glow ? new THREE.Color(col).convertSRGBToLinear() : new THREE.Color(0), emissiveIntensity:glow ? .9 : 0 });
+    } else if (mode === "clay" || mode === "claywire") m = new THREE.MeshStandardMaterial({ color:new THREE.Color(C.clay).convertSRGBToLinear(), roughness:.82, polygonOffset:true, polygonOffsetFactor:1, polygonOffsetUnits:1 });
+    else if (mode === "wire") m = new THREE.MeshBasicMaterial({ color:new THREE.Color(C.wireFill).convertSRGBToLinear(), polygonOffset:true, polygonOffsetFactor:1, polygonOffsetUnits:1 });
+    else if (mode === "matcap") m = new THREE.MeshMatcapMaterial({ matcap:matcapTex() });
+    else if (mode === "normals") m = new THREE.MeshNormalMaterial();
+    else m = new THREE.MeshBasicMaterial({ map:checker() });
+    m.side = THREE.DoubleSide; return texCache[k] = m;
+  }
+  const focusOf = key => (S.models[key].isolate && VW.focus[key]) || "all";
+  function partOn(key, P){ const M = S.models[key]; if (M.isolate){ const f = focusOf(key); return f === "all" || P.prop === f; } return VW.parts[key + P.prop] !== false; }
+  function apply(){
+    const D = cache[VW.model]; if (!D) return;
+    const hue = S.models[VW.model].hue || "#7fd3ff";
+    for (const P of Object.values(D.parts)){
+      const on = partOn(VW.model, P);
+      P.mesh.material = matFor(VW.model, P, VW.mode); P.mesh.visible = on;
+      P.lines.visible = on && (VW.mode === "wire" || VW.mode === "claywire");
+      P.lines.material.color.set(VW.mode === "wire" ? hue : "#2a2c31"); P.lines.material.opacity = VW.mode === "wire" ? .75 : .5;
+    }
+    document.getElementById("vwMode").textContent = MODES.find(m => m[0] === VW.mode)[1];
+    need = true;
+  }
+  function size(){
+    if (!renderer) return; const r = vwBox.getBoundingClientRect(); if (!r.width) return;
+    renderer.setPixelRatio(Math.min(2, devicePixelRatio || 1)); renderer.setSize(r.width, r.height, false); cam.aspect = r.width / r.height; cam.updateProjectionMatrix(); need = true;
+  }
+  function focusBox(){ const D = cache[VW.model], f = focusOf(VW.model); return f !== "all" && D.props[f] ? D.props[f].box : (S.models[VW.model].frame === "scene" ? D.all : new THREE.Box3(new THREE.Vector3(-D.size.x/2, 0, -D.size.z/2), new THREE.Vector3(D.size.x/2, D.size.y, D.size.z/2))); }
+  function camFor(box, dir){
+    const sz = box.getSize(new THREE.Vector3()), t = box.getCenter(new THREE.Vector3()), dn = dir.clone().normalize();
+    const vf = cam.fov * Math.PI / 180, hf = 2 * Math.atan(Math.tan(vf / 2) * cam.aspect);
+    const w = Math.max(sz.x, sz.z), fit = Math.max(sz.y / 2 / Math.tan(vf / 2), w / 2 / Math.tan(hf / 2)) * 1.12 + w / 2;
+    return { pos:t.clone().add(dn.multiplyScalar(fit)), target:t, r:sz.length() / 2 };
+  }
+  const DIRS = { front:new THREE.Vector3(.35, .12, 1), side:new THREE.Vector3(1, .08, 0), back:new THREE.Vector3(-.3, .12, -1), top:new THREE.Vector3(0.001, 1, .02), under:new THREE.Vector3(0.001, -1, .25) };
+  function goTo(dir, instant){
+    const D = cache[VW.model]; if (!D) return; const base = DIRS[dir] || DIRS.front, d = S.models[VW.model].frame === "scene" && (dir === "front" || !dir) ? new THREE.Vector3(.8, .45, 1) : base;
+    const c = camFor(focusBox(), d);
+    controls.minDistance = c.r * .05; controls.maxDistance = Math.max(c.r * 8, D.h * 3);
+    if (instant || reduce){ cam.position.copy(c.pos); controls.target.copy(c.target); controls.update(); need = true; return; }
+    fly = { p0:cam.position.clone(), t0:controls.target.clone(), p1:c.pos, t1:c.target, s:performance.now() };
+  }
+  async function show(key){
+    VW.model = key; document.getElementById("vwName").textContent = S.models[key].name;
+    document.querySelectorAll("[data-model]").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.model === key)));
+    chips(); if (!renderer) return;
+    if (!cache[key]){ loadBox.hidden = false; bar.style.width = "4%"; }
+    let D; try { D = await loadModel(key); } catch(e){ loadTxt.textContent = "Could not load the model. Refresh to try again."; return; }
+    if (VW.model !== key) return;
+    loadBox.hidden = true; while (root.children.length) root.remove(root.children[0]); root.add(D.holder);
+    const scene = S.models[key].frame === "scene"; ring.visible = ground.visible = !scene;
+    ring.scale.setScalar(Math.max(D.r * 1.25, 30) / 60); ground.scale.copy(ring.scale);
+    cam.near = Math.max(.5, D.h / 400); cam.far = D.h * 60; cam.updateProjectionMatrix();
+    apply(); goTo("front", true); facts(D); chips();
+  }
+  function facts(D){
+    const f = document.getElementById("vwFacts"); if (!f) return;
+    const fo = focusOf(VW.model), q = fo !== "all" ? D.props[fo] : null;
+    const v = q ? [q.polys, q.tris, q.verts, q.n] : [D.polys, D.tris, D.verts, S.models[VW.model].isolate ? Object.keys(D.props).length : Object.keys(D.parts).length];
+    f.querySelectorAll("dd").forEach((dd, i) => dd.textContent = v[i].toLocaleString("en-US"));
+    f.querySelectorAll("dt")[3].textContent = q ? "Materials" : (S.models[VW.model].isolate ? "Props" : "Parts");
+    document.getElementById("vwNote").textContent = S.models[VW.model].note;
+    document.getElementById("vwName").textContent = S.models[VW.model].name + (q ? " · " + ((S.models[VW.model].labels || {})[fo] || fo) : "");
+  }
+  function chips(){
+    const mc = document.getElementById("modeChips"), pc = document.getElementById("partChips"); if (!mc) return;
+    const M = S.models[VW.model], D = cache[VW.model];
+    document.getElementById("partLab").textContent = M.isolate ? "Props" : "Parts";
+    mc.innerHTML = MODES.map(m => `<button type="button" class="chip" data-mode="${m[0]}" aria-pressed="${VW.mode === m[0]}">${m[0] === "color" ? (M.tex ? "Textured" : "Colour") : m[1]}</button>`).join("");
+    if (M.isolate){
+      const names = M.order || (D ? Object.keys(D.props) : []), f = focusOf(VW.model);
+      pc.innerHTML = [["all","Whole scene"]].concat(names.map(n => [n, n])).map(([k, l]) => `<button type="button" class="chip" data-focus="${esc(k)}" aria-pressed="${f === k}">${esc((M.labels || {})[l] || l)}</button>`).join("");
+      return;
+    }
+    const names = D ? Object.keys(D.props) : Object.keys(M.parts);
+    pc.innerHTML = names.map(n => { const info = M.parts[n] || [n], sw = M.tex && M.tex[n] ? "" : (info[1] ? `<span class="sw" style="background:${esc(info[1])}"></span>` : "");
+      return `<button type="button" class="chip part" data-part="${esc(n)}" aria-pressed="${VW.parts[VW.model + n] !== false}">${sw}${esc(info[0])}</button>`; }).join("");
+  }
+  function focus(k){ VW.focus[VW.model] = k; idleT = performance.now(); apply(); chips(); goTo("front"); const D = cache[VW.model]; if (D) facts(D); }
+  function tick(now){
+    requestAnimationFrame(tick); if (!renderer || !visible) return;
+    if (fly){ const t = Math.min(1, (now - fly.s) / 700), e = t < .5 ? 2*t*t : 1 - Math.pow(-2*t + 2, 2) / 2;
+      cam.position.lerpVectors(fly.p0, fly.p1, e); controls.target.lerpVectors(fly.t0, fly.t1, e); if (t >= 1) fly = null; need = true; }
+    controls.autoRotate = VW.auto && !fly && now - idleT > 2500;
+    if (controls.update() || controls.autoRotate) need = true;
+    if (!need) return; need = false; renderer.render(scene, cam);
+  }
+  async function start(){
+    if (started) return; started = true;
+    try {
+      if (!window.THREE || !THREE.OrbitControls || !("DecompressionStream" in window)) throw new Error("unsupported");
+      renderer = new THREE.WebGLRenderer({ canvas:cv, antialias:true, alpha:true });
+      renderer.outputEncoding = THREE.sRGBEncoding; renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.05;
+      scene = new THREE.Scene(); cam = new THREE.PerspectiveCamera(32, 1, 1, 5000);
+      scene.add(new THREE.HemisphereLight(0xdfeaff, 0x1a1412, .85));
+      const key = new THREE.DirectionalLight(0xfff2e0, 1.7); key.position.set(-1.2, 2, 1.6); scene.add(key);
+      const fill = new THREE.DirectionalLight(0xa9c8ff, .45); fill.position.set(1.5, .6, 1); scene.add(fill);
+      const rim = new THREE.DirectionalLight(0x7fd3ff, 1.1); rim.position.set(.4, 1.2, -2); scene.add(rim);
+      root = new THREE.Group(); scene.add(root);
+      ground = new THREE.Mesh(new THREE.CircleGeometry(60, 96), new THREE.MeshBasicMaterial({ color:0x010102, transparent:true, opacity:.85, side:THREE.DoubleSide })); ground.rotation.x = -Math.PI / 2; ground.position.y = -.4; scene.add(ground);
+      ring = new THREE.Mesh(new THREE.TorusGeometry(60, .5, 8, 128), new THREE.MeshBasicMaterial({ color:new THREE.Color(0x7fd3ff).convertSRGBToLinear() })); ring.rotation.x = Math.PI / 2; ring.position.y = -.3; scene.add(ring);
+      controls = new THREE.OrbitControls(cam, cv);
+      controls.enableDamping = true; controls.dampingFactor = .09; controls.rotateSpeed = .8; controls.zoomSpeed = .9; controls.panSpeed = .8;
+      controls.minPolarAngle = 0; controls.maxPolarAngle = Math.PI; controls.screenSpacePanning = true; controls.autoRotateSpeed = 1.4;
+      controls.addEventListener("start", () => { fly = null; idleT = Infinity; hideHint(); });
+      controls.addEventListener("end", () => { idleT = performance.now() + 4000; });
+      controls.addEventListener("change", () => { need = true; });
+      size(); requestAnimationFrame(tick);
+      const h = vwBox.querySelector("#vwHint"); h.hidden = false; setTimeout(hideHint, 6000);
+      await show(VW.model);
+    } catch(e){ loadBox.hidden = true; const d = document.createElement("div"); d.className = "err"; d.textContent = "This browser can't show the 3D viewer. The turntable videos below show both characters from every side."; vwBox.appendChild(d); }
+  }
+  function hideHint(){ const h = vwBox.querySelector("#vwHint"); if (h) h.style.opacity = 0; }
+  /* Double-tap or double-click focuses the orbit on the point under the finger */
+  const ray = new THREE.Raycaster(); let lastTap = 0;
+  function focusAt(x, y){
+    if (!renderer) return; const r = cv.getBoundingClientRect();
+    ray.setFromCamera({ x:(x - r.left) / r.width * 2 - 1, y:-(y - r.top) / r.height * 2 + 1 }, cam);
+    const hit = ray.intersectObjects(root.children, true).find(h => h.object.isMesh && h.object.visible); if (!hit) return;
+    const off = cam.position.clone().sub(controls.target), d = Math.max(controls.minDistance * 2, off.length() * .55);
+    fly = { p0:cam.position.clone(), t0:controls.target.clone(), p1:hit.point.clone().add(off.setLength(d)), t1:hit.point.clone(), s:performance.now() }; idleT = Infinity;
+  }
+  cv.addEventListener("dblclick", e => focusAt(e.clientX, e.clientY));
+  cv.addEventListener("pointerup", e => { if (e.pointerType !== "touch") return; const n = performance.now(); if (n - lastTap < 300) focusAt(e.clientX, e.clientY); lastTap = n; });
+  vwBox.querySelector("#vwAuto").onclick = e => { VW.auto = !VW.auto; idleT = 0; e.currentTarget.setAttribute("aria-pressed", String(VW.auto)); };
+  vwBox.querySelector("#vwHome").onclick = () => { idleT = performance.now(); goTo("front"); };
+  vwBox.querySelector("#vwFull").onclick = () => { const p = document.fullscreenElement ? document.exitFullscreen() : (vwBox.requestFullscreen ? vwBox.requestFullscreen() : Promise.reject()); Promise.resolve(p).catch(() => {}); };
+  document.addEventListener("fullscreenchange", () => setTimeout(size, 50));
+  new IntersectionObserver(es => { visible = es[0].isIntersecting; need = true; if (visible) start(); }, { rootMargin:"300px" }).observe(vwBox);
+  addEventListener("resize", size);
+  VW.show = show; VW.focusProp = focus; VW.apply = apply; VW.go = goTo; VW.chips = chips; VW.size = size; VW.wake = () => { need = true; };
+  VW.facts = () => cache[VW.model] && facts(cache[VW.model]);
+})();
+
+/* ---------- Render + wiring ---------- */
+function renderPage(){
+  const y = scrollY; app.innerHTML = page(); app.classList.toggle("editing", editing);
+  document.getElementById("vwSlot").appendChild(vwBox); VW.chips(); VW.facts(); VW.size();
+  document.querySelectorAll("[data-model]").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.model === VW.model)));
+  setupClips(); spy(); musicUi(); scrollTo(0, y);
+}
+let io = null;
+function spy(){
+  if (io) io.disconnect();
+  io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) document.querySelectorAll(".strip a").forEach(a => a.setAttribute("aria-current", String(a.dataset.room === e.target.id))); }), { rootMargin:"-45% 0px -50% 0px" });
+  document.querySelectorAll("main section").forEach(s => io.observe(s));
+}
+function markDirty(){ dirty = true; const s = document.getElementById("status"); if (s){ s.textContent = "Unsaved changes"; s.classList.add("dirty"); s.parentElement.hidden = false; } const b = document.getElementById("saveBtn"); if (b) b.disabled = saving; }
+function status(t){ const s = document.getElementById("status"); if (s){ s.textContent = t; s.parentElement.hidden = false; } }
+
+function eyes(){
+  const f = Math.max(0, Math.min(1, scrollY / Math.max(1, document.documentElement.scrollHeight - innerHeight)));
+  document.querySelectorAll(".eye .iris").forEach(g => g.setAttribute("transform", `translate(${(Math.sin(f * 9) * 7).toFixed(1)} ${((f - .5) * 16).toFixed(1)})`));
+}
+addEventListener("scroll", eyes, { passive:true });
+if (!reduce) setInterval(() => { document.querySelectorAll(".eye .lid").forEach(l => { l.setAttribute("height", "100"); setTimeout(() => l.setAttribute("height", "0"), 130); }); }, 5200);
+
+app.addEventListener("input", e => { const t = e.target; if (t.dataset && t.dataset.k){ set(t.dataset.k, t.textContent); markDirty(); } });
+app.addEventListener("keydown", e => { const t = e.target; if (e.key === "Enter" && t.dataset && t.dataset.k && !t.dataset.ml){ e.preventDefault(); t.blur(); } });
+app.addEventListener("click", async e => {
+  const t = e.target;
+  if (t.closest("#musicBtn")){ musicToggle(); return; }
+  const md = t.closest("[data-model]"); if (md){ VW.show(md.dataset.model); return; }
+  const m = t.closest("[data-mode]"); if (m){ VW.mode = m.dataset.mode; VW.apply(); VW.chips(); return; }
+  const c = t.closest("[data-cam]"); if (c){ VW.go(c.dataset.cam); return; }
+  const p = t.closest("[data-part]"); if (p){ const k = VW.model + p.dataset.part; VW.parts[k] = VW.parts[k] === false; VW.apply(); VW.chips(); return; }
+  const fc = t.closest("[data-focus]"); if (fc){ VW.focusProp(fc.dataset.focus); return; }
+  const op = t.closest("[data-open]"); if (op){ if (op.dataset.prop) VW.focus[op.dataset.open] = op.dataset.prop; VW.show(op.dataset.open).then(() => { if (op.dataset.prop) VW.focusProp(op.dataset.prop); }); if (op.dataset.solo){ Object.keys(S.models[op.dataset.open].parts).forEach(n => VW.parts[op.dataset.open + n] = n === op.dataset.solo); VW.mode = "wire"; VW.apply(); VW.chips(); } return; }
+  const sb = t.closest("[data-snd]"); if (sb){ const v = sb.parentElement.querySelector("video"); v.muted = !v.muted; if (!v.muted){ v.currentTime = 0; v.play().catch(() => {}); } syncSnd(v); return; }
+  const cp = t.closest("[data-copy]"); if (cp){ const txt = S[cp.dataset.copy]; try { await navigator.clipboard.writeText(txt); cp.textContent = "Copied"; } catch(_){ const r = document.createRange(); r.selectNodeContents(cp.parentElement.querySelector(".v")); const s = getSelection(); s.removeAllRanges(); s.addRange(r); cp.textContent = "Selected"; } return; }
+  if (t.id === "editBtn"){ editing = !editing; renderPage(); return; }
+  if (t.id === "saveBtn"){ save(); return; }
+});
+app.addEventListener("play", e => { const v = e.target; if (v.matches && v.matches("video[data-clip]") && !v.muted) loud(v.currentSrc || v.src, true); }, true);
+app.addEventListener("pause", e => { const v = e.target; if (v.matches && v.matches("video[data-clip]")) loud(v.currentSrc || v.src, false); }, true);
+
+function buildPage(){
+  const keep = [...document.querySelectorAll('meta[name="claude:viewport-fit-sides"], link[href*="fonts.g"]')].map(n => n.outerHTML).join("\n");
+  const json = JSON.stringify(S).replace(/</g, "\\u003c"), libs = [...document.querySelectorAll('script[src*="three@"]')].map(s => s.outerHTML).join("\n");
+  return '<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>' + RESET + '</style></head><body>'
+    + "<title>" + esc(document.title) + "</title>\n" + keep + "\n" + document.getElementById("app-style").outerHTML + '\n\n<div id="app"></div>\n\n<script id="state" type="application/json">' + json + "<\/script>\n"
+    + libs + "\n" + document.getElementById("app-js").outerHTML + "</body></html>";
+}
+async function save(){
+  if (!artifactApi || saving) return; saving = true; document.getElementById("saveBtn").disabled = true; status("Saving…");
+  try { await artifactApi.publish(buildPage()); dirty = false; status("Saved. Everyone with the link sees this version."); }
+  catch(err){ const c = err && err.code; status(c === "conflict" ? "A newer version was saved elsewhere. Reloading to it." : c === "rate_limited" ? "Saving too often. Wait a moment, then save again." : "Could not save. Try again in a moment."); }
+  finally { saving = false; const b = document.getElementById("saveBtn"); if (b) b.disabled = !dirty; }
+}
+addEventListener("beforeunload", e => { if (dirty){ e.preventDefault(); e.returnValue = ""; } });
+
+renderPage(); eyes();
+if (location.hash === "#sid") location.hash = "#more";
+if (window.claude && typeof window.claude.use === "function"){
+  window.claude.use("artifact").then(a => { artifactApi = a; if (a) renderPage(); }).catch(() => {});
+}
+})();
+</script>
+
+</body>
+</html>
